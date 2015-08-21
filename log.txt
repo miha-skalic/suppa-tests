@@ -1,0 +1,60 @@
+# Refseq
+# v1
+/c/Python27/python.exe ../suppa_original/suppa.py generateEvents -i dat/annotation/refseq_annotation_formatted.gtf -o ./ioe_original/ref_seq -e SE
+
+/c/Python27/python.exe ../suppa_original/suppa.py psiPerEvent -i ./ioe_original/ref_seq_SE.ioe -e ./dat/pcr/ev/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_suppa1_ev.txt -f 1
+
+/c/Python27/python.exe ../suppa_original/suppa.py psiPerEvent -i ./ioe_original/ref_seq_SE.ioe -e ./dat/pcr/esrp1/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_suppa1_esrp1.txt -f 1
+
+
+# v2
+/c/Python27/python.exe ../suppa/suppa.py generateEvents -i dat/annotation/refseq_annotation_formatted.gtf -o ./ioe_v2/ref_seq -e SE
+
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./dat/pcr/ev/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_suppa2_ev.txt -f 1
+
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./dat/pcr/esrp1/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_suppa2_esrp1.txt -f 1
+
+
+# Ensembl
+# v1
+/c/Python27/python.exe ../suppa_original/suppa.py generateEvents -i dat/annotation/ensembl_annotation_formatted.gtf -o ./ioe_original/ensembl -e SE
+/c/Python27/python.exe ../suppa_original/suppa.py psiPerEvent -i ./ioe_original/ensembl_SE.ioe -e ./dat/pcr/ev/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_sailfish_suppa1_ev.txt -f 1
+/c/Python27/python.exe ../suppa_original/suppa.py psiPerEvent -i ./ioe_original/ensembl_SE.ioe -e ./dat/pcr/esrp1/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_sailfish_suppa1_esrp1.txt -f 1
+
+
+# v2
+/c/Python27/python.exe ../suppa/suppa.py generateEvents -i dat/annotation/ensembl_annotation_formatted.gtf -o ./ioe_v2/ensembl -e SE
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ensembl_SE.ioe -e ./dat/pcr/ev/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_sailfish_suppa2_ev.txt -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ensembl_SE.ioe -e ./dat/pcr/esrp1/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_sailfish_suppa2_esrp1.txt -f 1
+
+# effect of -f parameter
+for ((I=1; I<200; I+=5)); do
+  /c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./dat/pcr/esrp1/refseq_tpm_sailfish-corrected.tab -o ./psi/SE_fparam_esrp1/refseq_sailfish_suppa2_esrp_"$I" -f "$I"
+done
+
+
+
+# PCR-like 
+/c/Python27/python.exe ../suppa/suppa.py generateEvents -i dat/annotation/refseq_annotation_formatted.gtf -o ./ioe_v2/refseq -e SE
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/refseq_SEpcr.ioe -e ./dat/pcr/esrp1/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_SEpcr_esrp1.txt -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/refseq_SEpcr.ioe -e ./dat/pcr/ev/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_SEpcr_ev.txt -f 1
+
+# PCR-like v2
+/c/Python27/python.exe ../suppa/suppa.py generateEvents -i dat/annotation/refseq_annotation_formatted.gtf -o ./ioe_v2/refseq -e SE
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/refseq_SEpcr2.ioe -e ./dat/pcr/esrp1/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_SEpcr2_esrp1_th10 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/refseq_SEpcr2.ioe -e ./dat/pcr/ev/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_SEpcr2_ev_th10 -f 1
+
+
+# check effect of size 
+for ((I=1; I<=70; I+=3)); do  
+   /c/Python27/python.exe ../suppa/suppa.py generateEvents -t "$I" -i dat/annotation/refseq_annotation_formatted.gtf -o ./ioe_v2/refseq_"$I" -e SE
+   /c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/refseq_"$I"_SEpcr2.ioe -e ./dat/pcr/esrp1/refseq_tpm_sailfish-corrected.tab -o ./psi/PCR2_series/refseq_sailfish_SEpcr2_esrp1_th"$I" -f 1
+done
+
+for ((I=1; I<=70; I+=3)); do  
+   /c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/refseq_"$I"_SEpcr2.ioe -e ./dat/pcr/ev/refseq_tpm_sailfish-corrected.tab -o ./psi/PCR2_series_ev/refseq_sailfish_SEpcr2_ev_th"$I" -f 1
+done
+
+# SS counter example
+	/c/Python27/python.exe ../suppa/suppa.py generateEvents -i dat/annotation/refseq_annotation_formatted.gtf -o ./ioe_SS/refseq
+	
