@@ -57,4 +57,20 @@ done
 
 # SS counter example
 	/c/Python27/python.exe ../suppa/suppa.py generateEvents -i dat/annotation/refseq_annotation_formatted.gtf -o ./ioe_SS/refseq
-	
+
+# ensembl pcr / pcr2
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens_pcr/ensemble_SEpcr.ioe -e ./dat/pcr/esrp1/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_tests/sailfish_SEpcr_esrp1 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens_pcr/ensemble_SEpcr.ioe -e ./dat/pcr/ev/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_tests/sailfish_SEpcr_ev -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens_pcr/ensemble_SEpcr2.ioe -e ./dat/pcr/esrp1/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_tests/sailfish_SEpcr2_esrp1 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens_pcr/ensemble_SEpcr2.ioe -e ./dat/pcr/ev/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_tests/sailfish_SEpcr2_ev -f 1
+
+
+# Kalista test
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./kallisto_TPM/kallisto_refseq_esrp1_tpm.txt -o ./psi/refseq_kallisto_suppa2_esrp1 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./kallisto_TPM/kallisto_refseq_ev_tpm.txt -o ./psi/refseq_kallisto_suppa2_ev -f 1
+
+
+# Salmon tests
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./salmon_TPM/refseq_salmin_esrp1.tsv -o ./psi/refseq_salmon_suppa2_esrp1 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./salmon_TPM/refseq_salmin_ev.tsv -o ./psi/refseq_salmon_suppa2_ev -f 1
+
