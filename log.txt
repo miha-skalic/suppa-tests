@@ -74,3 +74,15 @@ done
 /c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./salmon_TPM/refseq_salmin_esrp1.tsv -o ./psi/refseq_salmon_suppa2_esrp1 -f 1
 /c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/ref_seq_SE.ioe -e ./salmon_TPM/refseq_salmin_ev.tsv -o ./psi/refseq_salmon_suppa2_ev -f 1
 
+
+
+# PCR3 - refseq
+/c/Python27/python.exe ../suppa/suppa.py generateEvents -i dat/annotation/refseq_annotation_formatted.gtf -o ./ioe_v2/refseq -e SE -t 10
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/refseq_SEpcr3.ioe -e ./dat/pcr/esrp1/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_SEpcr3_esrp1_th10 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_v2/refseq_SEpcr3.ioe -e ./dat/pcr/ev/refseq_tpm_sailfish-corrected.tab -o ./psi/refseq_sailfish_SEpcr3_ev_th10 -f 1
+
+# PCR3 -ensembl
+/c/Python27/python.exe ../suppa/suppa.py generateEvents -i dat/annotation/ensembl_annotation_formatted.gtf -o ./ioe_ens_pcr/ensembl -e SE -t 10
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens_pcr/ensembl_SEpcr3.ioe -e ./dat/pcr/esrp1/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_tests/sailfish_SEpcr3_esrp1 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens_pcr/ensembl_SEpcr3.ioe -e ./dat/pcr/ev/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_tests/sailfish_SEpcr3_ev -f 1
+
