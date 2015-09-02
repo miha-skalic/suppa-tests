@@ -86,3 +86,22 @@ done
 /c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens_pcr/ensembl_SEpcr3.ioe -e ./dat/pcr/esrp1/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_tests/sailfish_SEpcr3_esrp1 -f 1
 /c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens_pcr/ensembl_SEpcr3.ioe -e ./dat/pcr/ev/ensembl_tpm_sailfish-corrected.tab -o ./psi/ensembl_tests/sailfish_SEpcr3_ev -f 1
 
+# Ensembl75 tests
+# default
+/c/Python27/python.exe ../suppa/suppa.py generateEvents -i ensembl75_annot/HS_ens75_formated.gtf -o ./ioe_ens75/ensembl75 -e SE
+
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens75/ensembl75_SE.ioe -e ./ensembl75_TPM/kalisto_ensembl75_esrp1.tab -o ./psi/ensembl75/kallisto_ensembl75_SE_esrp1 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens75/ensembl75_SE.ioe -e ./ensembl75_TPM/kalisto_ensembl75_ev.tab -o ./psi/ensembl75/kallisto_ensembl75_SE_ev -f 1
+
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens75/ensembl75_SE.ioe -e ./ensembl75_TPM/salmon_ensembl75_esrp1.tab -o ./psi/ensembl75/salmon_ensembl75_SE_esrp1 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens75/ensembl75_SE.ioe -e ./ensembl75_TPM/salmon_ensembl75_ev.tab -o ./psi/ensembl75/salmon_ensembl75_SE_ev -f 1
+
+
+# Bias correction test
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens75/ensembl75_SE.ioe -e ./ensembl75_TPM/salmon_ensembl75_corrected_esrp1.tab -o ./psi/ensembl75/salmon_corrected_ensembl75_SE_esrp1 -f 1
+/c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens75/ensembl75_SE.ioe -e ./ensembl75_TPM/salmon_ensembl75_corrected_ev.tab -o ./psi/ensembl75/salmon_corrected_ensembl75_SE_ev -f 1
+
+# Ensembl -f effect
+for ((I=1; I<250; I+=5)); do
+  /c/Python27/python.exe ../suppa/suppa.py psiPerEvent -i ./ioe_ens75/ensembl75_SE.ioe -e ./ensembl75_TPM/salmon_ensembl75_corrected_esrp1.tab -o ./psi/ensembl75_fparam/ensembl75_sailfish_suppa2_esrp_"$I" -f "$I"
+done

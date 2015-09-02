@@ -32,6 +32,8 @@ def load_se_events(file_path):
             exp_val = line[-1]
             line = line[0].split(';')[1]
             position = tuple([line.split(':')[1]] + [int(x) for x in line.split('-')[1].split(':')])
+            if exp_val.startswith('NA'):
+                continue
             event_dict[position] = event_dict.get(position, []) + [float(exp_val)]
     return event_dict
 
@@ -67,7 +69,7 @@ def make_points_pairs(pcr_data, calculation_data, verbose=True):
             n_multi += 1
     if verbose:
         print(('\tPoints covered: {} ({:.4f} %; removed {}'
-               ' point(s) duo to "duplicated" event)').format(len(point_pairs), len(point_pairs) / len(pcr_data),
+               ' point(s) duo to "duplicated" event)').format(len(point_pairs), len(point_pairs) * 100 / len(pcr_data),
                                                               n_multi))
     return point_pairs
 
