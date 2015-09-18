@@ -51,12 +51,17 @@ def collect_pcr_psi():
     return pcr_esrp1, pcr_ev
 
 
-def make_points_pairs(pcr_data, calculation_data, verbose=True):
+def make_points_pairs(pcr_data, calculation_data, verbose=True, table_file=''):
     """
     Returns pairs of points
     """
     n_multi = 0
     point_pairs = []
+    
+    if table_file:
+        table_file = open(table_file, 'w')
+        print('Event_coordinates\tNGS_PSI\tPCR_PSI', file=table_file)
+    
     for event in pcr_data:
         if event not in calculation_data:
             continue
@@ -65,6 +70,8 @@ def make_points_pairs(pcr_data, calculation_data, verbose=True):
             if calculation_data[event][0] < 0:
                 continue
             point_pairs.append((calculation_data[event][0], pcr_data[event]))
+            if table_file:
+                print('{}\t{}\t{}'.format(event, calculation_data[event][0], pcr_data[event]), file=table_file)
         else:
             n_multi += 1
     if verbose:
