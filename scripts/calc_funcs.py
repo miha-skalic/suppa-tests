@@ -71,7 +71,7 @@ def make_points_pairs(pcr_data, calculation_data, verbose=True, table_file=''):
                 continue
             point_pairs.append((calculation_data[event][0], pcr_data[event]))
             if table_file:
-                print('{}\t{}\t{}'.format(event, calculation_data[event][0], pcr_data[event]), file=table_file)
+                print('{}\t{}\t{}'.format('{}:{}-{}'.format(event[0], event[1], event[2]), calculation_data[event][0], pcr_data[event]), file=table_file)
         else:
             n_multi += 1
     if verbose:
